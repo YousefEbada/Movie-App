@@ -1,0 +1,91 @@
+<div class="container py-4">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1 class="h2 fw-bold">Watch list</h1>
+    </div>
+  </div>
+
+  @if (watchlistMovies.length === 0) {
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center py-5">
+      <div class="mb-4">
+        <i class="fas fa-heart-broken fa-5x text-muted opacity-50"></i>
+      </div>
+      <h3 class="text-muted mb-4">No Movies in watch list</h3>
+      <a routerLink="/" class="btn btn-warning btn-lg px-5"> back to home </a>
+    </div>
+  </div>
+  } @else {
+
+  <div class="row g-4">
+    @for (movie of watchlistMovies; track movie.id) {
+    <div class="col-12 col-md-6">
+      <div class="card border-0 shadow-sm watchlist-card">
+        <div class="row g-0">
+          <div class="col-4">
+            <img
+              [src]="movie.poster_path"
+              [alt]="movie.title"
+              class="img-fluid rounded-start h-100"
+              style="object-fit: cover; cursor: pointer"
+              (click)="navigateToDetail(movie.id)"
+            />
+          </div>
+          <div class="col-8">
+            <div class="card-body h-100 d-flex flex-column">
+              <div
+                class="d-flex justify-content-between align-items-start mb-2"
+              >
+                <h5 class="card-title fw-bold mb-1">
+                  <a
+                    [routerLink]="['/movie', movie.id]"
+                    class="text-decoration-none text-dark"
+                  >
+                    {{ movie.title }}
+                  </a>
+                </h5>
+                <button
+                  class="btn btn-warning btn-sm rounded-circle p-2 border-0 heart-btn"
+                  (click)="removeFromWatchlist(movie)"
+                  style="width: 35px; height: 35px"
+                >
+                  <i class="fas fa-heart text-white"></i>
+                </button>
+              </div>
+
+              <div class="mb-2">
+                <div class="d-flex align-items-center">
+                  @for (star of getStars(movie.vote_average ?? 0); track $index)
+                  {
+                  <i
+                    class="fas fa-star me-1"
+                    [class.text-warning]="star.filled"
+                    [class.text-muted]="!star.filled"
+                  ></i>
+                  }
+                  <span class="ms-2 small fw-bold">{{
+                    movie.vote_average | number : "1.1-1"
+                  }}</span>
+                </div>
+              </div>
+
+              <p class="card-text text-muted small flex-grow-1">
+                {{ movie.overview | slice : 0 : 120 }}@if (movie.overview.length
+                > 120) {...}
+              </p>
+
+              <div class="mt-auto">
+                <small class="text-muted">{{
+                  getYear(movie.release_date)
+                }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+</div>

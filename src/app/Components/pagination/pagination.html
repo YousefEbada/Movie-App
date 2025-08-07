@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-12">
+    <nav aria-label="Movie pagination">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a
+            class="page-link"
+            href="#"
+            (click)="goToPage(currentPage - 1, $event)"
+          >
+            <i class="fas fa-chevron-left"></i>
+          </a>
+        </li>
+
+        @if (currentPage > 3) {
+        <li class="page-item">
+          <a class="page-link" href="#" (click)="goToPage(1, $event)">1</a>
+        </li>
+        @if (currentPage > 4) {
+        <li class="page-item disabled">
+          <span class="page-link">...</span>
+        </li>
+        } } @for (page of getVisiblePages(); track page) {
+        <li class="page-item" [class.active]="page === currentPage">
+          <a class="page-link" href="#" (click)="goToPage(page, $event)">{{
+            page
+          }}</a>
+        </li>
+        } @if (currentPage < totalPages - 2) { @if (currentPage < totalPages -
+        3) {
+        <li class="page-item disabled">
+          <span class="page-link">...</span>
+        </li>
+        }
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="#"
+            (click)="goToPage(totalPages, $event)"
+            >{{ totalPages }}</a
+          >
+        </li>
+        }
+
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a
+            class="page-link"
+            href="#"
+            (click)="goToPage(currentPage + 1, $event)"
+          >
+            <i class="fas fa-chevron-right"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

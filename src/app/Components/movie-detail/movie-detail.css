@@ -1,0 +1,18 @@
+.heart-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.heart-btn:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .display-6 {
+    font-size: 2rem;
+  }
+
+  .btn-lg {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}

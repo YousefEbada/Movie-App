@@ -1,0 +1,16 @@
+.watchlist-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.watchlist-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.heart-btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.heart-btn:hover {
+  transform: scale(1.1);
+}
